@@ -4,6 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import junit.framework.Assert;
+
 public class Iphone_Page {
 	
 	private static WebElement element = null;
@@ -38,6 +40,20 @@ public class Iphone_Page {
 	public static WebElement goToCheckout(WebDriver driver) {
 		element = driver.findElement(By.linkText("Go to Checkout"));
 		return element;
+	}
+	
+	public static WebElement youSaveParent(WebDriver driver, WebElement iphone32GBParentClass) {
+		element = iphone32GBParentClass.findElement(By.className("wpsc_product_price"));
+		return element;
+	}
+	
+	public static WebElement iphone32GBParentClass(WebDriver driver) {
+		element = driver.findElement(By.name("product_98"));
+		return element;
+	}
+	
+	public static void youSaveAssertion(Double original, Double discounted, Double discount) {
+		Assert.assertEquals(discounted, original-discount);
 	}
 
 }

@@ -1,6 +1,7 @@
 package com.storedemo;
 
 import java.io.File;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -27,6 +28,8 @@ public class Storedemo
     	//WebDriver driver = openBrowser();
     	System.setProperty("webdriver.chrome.driver", "C:\\Users\\Admin\\Downloads\\chromedriver_win32\\chromedriver.exe");
     	WebDriver driver = new ChromeDriver();
+    	//The line below maximizes the browser window...
+    	driver.manage().window().maximize();
     	driver.get("http://store.demoqa.com");
     	//WebElement productCategoryLink = driver.findElement(By.id("menu-item-33"));
     	Actions actions = new Actions(driver);
@@ -37,7 +40,23 @@ public class Storedemo
     	//Thread.sleep(3000);
     	//Home_Page.iPhoneCategory_Link(driver).click();
     	//actions.click().build().perform();
-    	Thread.sleep(2000);
+    	Thread.sleep(1000);
+    	String a = Iphone_Page.youSaveParent(driver, Iphone_Page.iphone32GBParentClass(driver)).getText();
+    	//System.out.println(a);
+    	String b = a.substring(1, 6);
+    	//System.out.println(b);
+    	Double oldPrice32GB = Double.parseDouble(b.replaceAll("[^\\d.]", ""));
+    	//System.out.println(oldPrice32GB);
+    	String c = a.substring(9, 14);
+    	//System.out.println(c);
+    	Double newPrice32GB = Double.parseDouble(c.replaceAll("[^\\d.]", ""));
+    	//System.out.println(newPrice32GB);
+    	String d = a.substring(27, 31);
+    	//System.out.println(d);
+    	Double youSave = Double.parseDouble(d.replaceAll("[^\\d.]", ""));
+    	//System.out.println(youSave);
+    	//oldPrice32GB = 1000.0;
+    	Iphone_Page.youSaveAssertion(oldPrice32GB, newPrice32GB, youSave);
     	//driver.get("http://store.demoqa.com/products-page/product-category/iphones");
     	//WebElement iphone4ParentClass = null;
 		//Iphone_Page.iphone4ParentClass(driver);
@@ -48,7 +67,7 @@ public class Storedemo
     	Iphone_Page.iphone4AddToCartButton(driver, Iphone_Page.iphone4ParentClass(driver)).click();
     	Thread.sleep(2000);
     	Iphone_Page.goToCheckout(driver).click();
-    	Thread.sleep(2000);
+    	Thread.sleep(1000);
     	String price = Checkout_Page.subTotalAmount(driver, Checkout_Page.subTotalParent(driver)).getText();
     	Double phonePrice = Double.parseDouble(price.replaceAll("[^\\d.]", ""));
     	String quantity = Checkout_Page.quantity(driver).getAttribute("value");
@@ -64,7 +83,7 @@ public class Storedemo
     	//String d = Checkout_Page.iphonePriceAmount(driver).getText();
     	//System.out.println(d);
     	Checkout_Page.updateQuantity(driver).click();
-    	Thread.sleep(2000);
+    	Thread.sleep(1000);
     	//The lines below are responsible for isolating the values used to calculate subtotals and totals for verification equations...
     	 subtotal = Checkout_Page.subTotalAmount(driver, Checkout_Page.subTotalParent(driver)).getText();
     	 //System.out.println(subtotal);
@@ -80,13 +99,13 @@ public class Storedemo
     	 Checkout_Page.verifySubtotalAssertion(quantityActual, phonePrice, subtotalActual);
     	 //Thread.sleep(1000);
     	 Checkout_Page.continueLink(driver).click();
-    	 Thread.sleep(4000);
+    	 Thread.sleep(1000);
     	 Checkout_Page.countryDropdown(driver).click();
     	 Thread.sleep(1000);
     	 Checkout_Page.unitedStates(driver).click();
     	 Checkout_Page.shippingCostState(driver).sendKeys("Ga");
     	 Checkout_Page.calculateButton(driver).click();
-    	 Thread.sleep(5000);
+    	 Thread.sleep(1000);
     	 Checkout_Page.billingEmailAddress(driver).sendKeys("bjizl2020@gmail.com");
     	 Checkout_Page.billingFirstName(driver).sendKeys("Basil");
     	 Checkout_Page.billingLastName(driver).sendKeys("Harris");
@@ -94,13 +113,13 @@ public class Storedemo
     	 Checkout_Page.billingCity(driver).sendKeys("Glennville");
     	 Checkout_Page.billingCountry(driver).click();
     	 Checkout_Page.billingCountry(driver).sendKeys("USA");
-    	 Thread.sleep(2000);
+    	 Thread.sleep(1000);
     	 //Checkout_Page.unitedStates(driver).click();
     	 Checkout_Page.billingState(driver).sendKeys("Ga");
     	 Checkout_Page.billingPostalCode(driver).sendKeys("30427");
     	 Checkout_Page.phoneNumber(driver).sendKeys("912-237-1758");
     	 Checkout_Page.sameAsBilling(driver).click();
-    	 Thread.sleep(2000);
+    	 Thread.sleep(1000);
     	 //String shipping = Checkout_Page.shippingCost(driver).getText();
     	 //System.out.println(shipping);
     	 String shipping = Checkout_Page.shippingCost(driver, Checkout_Page.shippingCostParent(driver)).getText();
