@@ -176,6 +176,14 @@ public class Checkout_Page {
 		return element;
 	}
 	
+	 //String total = Checkout_Page.totalCost(driver).getText();
+	 //Double totalCost = Double.parseDouble(total.replaceAll("[^\\d.]", ""));
+	public static Double getDouble(WebDriver driver, WebElement element) {
+		String a = element.getText();
+		Double b = Double.parseDouble(a.replaceAll("[^\\d.]", ""));
+		return b;
+	}
+	
 	public static boolean verifySubtotal(Double quantity, Double price, Double subtotal) {
 		if (subtotal!=quantity*price) {
 			return false;
